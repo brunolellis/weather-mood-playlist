@@ -3,6 +3,7 @@ package io.github.brunolellis.playlist.usecase.genre;
 import io.github.brunolellis.playlist.usecase.Weather;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,9 +1,10 @@
 package io.github.brunolellis.playlist.usecase.city;
 
 import io.github.brunolellis.playlist.usecase.Playlist;
+import reactor.core.publisher.Mono;
 
 public interface RetrievePlaylistByCityUseCase {
 
-    Playlist query(CityQuery query);
+    Mono<Playlist> query(CityQuery query);
 
 }

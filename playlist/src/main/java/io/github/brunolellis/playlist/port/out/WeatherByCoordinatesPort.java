@@ -1,7 +1,8 @@
 package io.github.brunolellis.playlist.port.out;
 
 import io.github.brunolellis.playlist.usecase.Weather;
+import reactor.core.publisher.Mono;
 
 public interface WeatherByCoordinatesPort {
-    Weather findWeatherByCoordinates(double latitude, double longitude);
+    Mono<Weather> findWeatherByCoordinates(double latitude, double longitude);
 }

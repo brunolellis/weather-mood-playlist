@@ -1,9 +1,10 @@
 package io.github.brunolellis.playlist.usecase.coordinates;
 
 import io.github.brunolellis.playlist.usecase.Playlist;
+import reactor.core.publisher.Mono;
 
 public interface RetrievePlaylistByCoordinatesUseCase {
 
-    Playlist query(CoordinatesQuery query);
+    Mono<Playlist> query(CoordinatesQuery query);
 
 }

@@ -10,6 +10,7 @@ import io.github.brunolellis.playlist.usecase.genre.Genre;
 import io.github.brunolellis.playlist.usecase.genre.RetrieveGenreByWeatherUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -20,13 +21,9 @@ public class RetrievePlaylistByCoordinatesService implements RetrievePlaylistByC
     private final RetrieveGenreByWeatherUseCase genreService;
 
     @Override
-    public Playlist query(CoordinatesQuery query) {
-        Weather weather = weatherByCoordinatesPort.findWeatherByCoordinates(query.getLatitude(), query.getLongitude());
-
-        Genre genre = genreService.retrieve(weather);
-
-        Playlist playlist = musicPort.searchPlaylistByGenre(genre);
-
-        return playlist;
+    public Mono<Playlist> query(CoordinatesQuery query) {
+        return weatherByCoordinatesPort.findWeatherByCoordinates(query.getLatitude(), query.getLongitude())
+                .map(weather -> genreService.retrieve(weather))
+                .flatMap(genre -> musicPort.searchPlaylistByGenre(genre));
     }
 }

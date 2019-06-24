@@ -12,6 +12,7 @@ import io.github.brunolellis.playlist.usecase.genre.Genre;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class RetrievePlaylistByCoordinatesUseCaseTest extends AbstractUseCaseTes
                 )));
 
         CoordinatesQuery query = new CoordinatesQuery(-22.907104, -47.063240);
-        Playlist playlist = retrievePlaylistByCoordinatesUseCase.query(query);
+        Playlist playlist = retrievePlaylistByCoordinatesUseCase.query(query).block();
 
         assertEquals(2, playlist.getTracks().size());
         assertEquals("Dream Theater - A Change of Seasons", playlist.getTracks().get(0).getName());
@@ -42,12 +43,12 @@ public class RetrievePlaylistByCoordinatesUseCaseTest extends AbstractUseCaseTes
 
     private void setupMusicMock(Genre genre, Playlist playlist) {
         Mockito.when(musicPort.searchPlaylistByGenre(genre))
-                .thenReturn(playlist);
+                .thenReturn(Mono.just(playlist));
     }
 
     private void setupWeatherMock(double latitude, double longitude, float temperature) {
         Mockito.when(weatherByCoordinatesPort.findWeatherByCoordinates(latitude, longitude))
-                .thenReturn(new Weather(temperature));
+                .thenReturn(Mono.just(new Weather(temperature)));
     }
 
 }

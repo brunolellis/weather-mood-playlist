@@ -10,6 +10,7 @@ import io.github.brunolellis.playlist.usecase.genre.Genre;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class RetrievePlaylistByCityUseCaseTest extends AbstractUseCaseTest {
                 )));
 
         CityQuery query = new CityQuery("Campinas");
-        Playlist playlist = retrievePlaylistByCityUseCase.query(query);
+        Playlist playlist = retrievePlaylistByCityUseCase.query(query).block();
 
         assertEquals(2, playlist.getTracks().size());
         assertEquals("The Beatles - I Want To Hold Your Hand", playlist.getTracks().get(0).getName());
@@ -40,12 +41,12 @@ public class RetrievePlaylistByCityUseCaseTest extends AbstractUseCaseTest {
 
     private void setupMusicMock(Genre genre, Playlist playlist) {
         Mockito.when(musicPort.searchPlaylistByGenre(genre))
-                .thenReturn(playlist);
+                .thenReturn(Mono.just(playlist));
     }
 
     private void setupWeatherMock(String city, float temperature) {
         Mockito.when(weatherByCityPort.findWeatherByCity(city))
-                .thenReturn(new Weather(temperature));
+                .thenReturn(Mono.just(new Weather(temperature)));
     }
 
     @Test(expected = CityNotFoundException.class)
