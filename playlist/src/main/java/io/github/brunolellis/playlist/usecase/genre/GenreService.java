@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,8 @@ public class GenreService implements RetrieveGenreByWeatherUseCase {
 
     @Override
     public Genre retrieve(Weather weather) {
+        Objects.requireNonNull(weather, "weather must not be null");
+
         return genres.stream()
                 .filter(strategy -> strategy.accepts(weather))
                 .findFirst()

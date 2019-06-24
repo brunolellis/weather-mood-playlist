@@ -1,11 +1,11 @@
 package io.github.brunolellis.playlist.service;
 
 import io.github.brunolellis.playlist.port.out.MusicPort;
-import io.github.brunolellis.playlist.port.out.WeatherByCityPort;
+import io.github.brunolellis.playlist.port.out.WeatherByCoordinatesPort;
 import io.github.brunolellis.playlist.usecase.Playlist;
 import io.github.brunolellis.playlist.usecase.Weather;
-import io.github.brunolellis.playlist.usecase.city.CityQuery;
-import io.github.brunolellis.playlist.usecase.city.RetrievePlaylistByCityUseCase;
+import io.github.brunolellis.playlist.usecase.coordinates.CoordinatesQuery;
+import io.github.brunolellis.playlist.usecase.coordinates.RetrievePlaylistByCoordinatesUseCase;
 import io.github.brunolellis.playlist.usecase.genre.Genre;
 import io.github.brunolellis.playlist.usecase.genre.RetrieveGenreByWeatherUseCase;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RetrievePlaylistByCityService implements RetrievePlaylistByCityUseCase {
+public class RetrievePlaylistByCoordinatesService implements RetrievePlaylistByCoordinatesUseCase {
 
-    private final WeatherByCityPort weatherByCityPort;
+    private final WeatherByCoordinatesPort weatherByCoordinatesPort;
     private final MusicPort musicPort;
     private final RetrieveGenreByWeatherUseCase genreService;
 
     @Override
-    public Playlist query(CityQuery query) {
-        Weather weather = weatherByCityPort.findWeatherByCity(query.getCity());
+    public Playlist query(CoordinatesQuery query) {
+        Weather weather = weatherByCoordinatesPort.findWeatherByCoordinates(query.getLatitude(), query.getLongitude());
 
         Genre genre = genreService.retrieve(weather);
 
@@ -29,5 +29,4 @@ public class RetrievePlaylistByCityService implements RetrievePlaylistByCityUseC
 
         return playlist;
     }
-
 }

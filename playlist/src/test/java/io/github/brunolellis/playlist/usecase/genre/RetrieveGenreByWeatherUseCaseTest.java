@@ -58,4 +58,14 @@ public class RetrieveGenreByWeatherUseCaseTest {
         assertEquals(Genre.CLASSICAL, genre);
     }
 
+    @Test
+    public void whenWeatherIsNullShouldThrowNPE() {
+        try {
+            genreWeatherService.retrieve(null);
+
+        } catch (NullPointerException e) {
+            assertEquals("weather must not be null", e.getMessage());
+        }
+    }
+
 }

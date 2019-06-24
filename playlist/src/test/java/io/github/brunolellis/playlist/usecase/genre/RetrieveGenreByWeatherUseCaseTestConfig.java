@@ -7,4 +7,3 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("io.github.brunolellis.playlist.usecase.genre")
 public class RetrieveGenreByWeatherUseCaseTestConfig {
 }
-
