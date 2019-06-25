@@ -1,4 +1,4 @@
-package io.github.brunolellis.ports.out;
+package io.github.brunolellis.ports.out.weather;
 
 import io.github.brunolellis.playlist.port.out.CityNotFoundException;
 import io.github.brunolellis.playlist.port.out.WeatherByCityPort;
@@ -16,11 +16,17 @@ public class WeatherService implements WeatherByCityPort, WeatherByCoordinatesPo
 
     @Override
     public Mono<Weather> findWeatherByCity(String city) throws CityNotFoundException {
-        return gateway.getTemperature(city);
+        return gateway.getTemperature(city)
+                .map(WeatherService::convert);
     }
 
     @Override
     public Mono<Weather> findWeatherByCoordinates(double latitude, double longitude) {
-        return gateway.getTemperature(latitude, longitude);
+        return gateway.getTemperature(latitude, longitude)
+                .map(WeatherService::convert);
+    }
+
+    private static Weather convert(OpenWeatherResponse response) {
+        return new Weather(response.getTemperature().getCurrent());
     }
 }

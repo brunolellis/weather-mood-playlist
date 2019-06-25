@@ -1,4 +1,4 @@
-package io.github.brunolellis.ports.out;
+package io.github.brunolellis.ports.out.spotify;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PortsTestConfig.class)
 @TestPropertySource("classpath:application.properties")
-public abstract class AbstractOpenWeatherMapTest {
+public abstract class AbstractSpotifyTest {
 
 }
 
@@ -19,7 +19,7 @@ public abstract class AbstractOpenWeatherMapTest {
 @ComponentScan("io.github.brunolellis.ports")
 class PortsTestConfig {
 	
-	@EnableConfigurationProperties//(OpenWeatherMapProperties.class)
+	@EnableConfigurationProperties
 	public static class TestConfiguration {
 
 	}

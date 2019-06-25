@@ -1,16 +1,25 @@
 package io.github.brunolellis.playlist.usecase;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Playlist {
 
     private List<Track> tracks;
+
+    public List<Track> getTracks() {
+        if (tracks == null) {
+            tracks = new ArrayList<>();
+        }
+        return tracks;
+    }
 
 }

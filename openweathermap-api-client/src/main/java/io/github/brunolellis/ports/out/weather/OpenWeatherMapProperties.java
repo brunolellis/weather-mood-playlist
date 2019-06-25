@@ -1,4 +1,4 @@
-package io.github.brunolellis.ports.out;
+package io.github.brunolellis.ports.out.weather;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

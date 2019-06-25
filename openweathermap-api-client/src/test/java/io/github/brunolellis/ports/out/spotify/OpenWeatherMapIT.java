@@ -1,14 +1,15 @@
-package io.github.brunolellis.ports.out;
+package io.github.brunolellis.ports.out.spotify;
 
 import static org.junit.Assert.assertTrue;
 
+import io.github.brunolellis.ports.out.weather.WeatherService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.github.brunolellis.playlist.usecase.Weather;
 import reactor.core.publisher.Mono;
 
-public class WeatherServiceTest extends AbstractOpenWeatherMapTest {
+public class OpenWeatherMapIT extends AbstractWeatherTest {
 
 	@Autowired
     private WeatherService weatherService;

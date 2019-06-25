@@ -29,16 +29,16 @@ public class RetrievePlaylistByCoordinatesUseCaseTest extends AbstractUseCaseTes
 
         setupMusicMock(Genre.ROCK, new Playlist(
                 List.of(
-                        new Track("Dream Theater - A Change of Seasons"),
-                        new Track("Dream Theater - The Dance Of Eternity")
+                        new Track("A Change of Seasons", List.of(new Track.Artist("Dream Theater"))),
+                        new Track("The Dance Of Eternity", List.of(new Track.Artist("Dream Theater")))
                 )));
 
         CoordinatesQuery query = new CoordinatesQuery(-22.907104, -47.063240);
         Playlist playlist = retrievePlaylistByCoordinatesUseCase.query(query).block();
 
         assertEquals(2, playlist.getTracks().size());
-        assertEquals("Dream Theater - A Change of Seasons", playlist.getTracks().get(0).getName());
-        assertEquals("Dream Theater - The Dance Of Eternity", playlist.getTracks().get(1).getName());
+        assertEquals("A Change of Seasons", playlist.getTracks().get(0).getName());
+        assertEquals("The Dance Of Eternity", playlist.getTracks().get(1).getName());
     }
 
     private void setupMusicMock(Genre genre, Playlist playlist) {

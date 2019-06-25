@@ -27,16 +27,16 @@ public class RetrievePlaylistByCityUseCaseTest extends AbstractUseCaseTest {
 
         setupMusicMock(Genre.POP, new Playlist(
                 List.of(
-                        new Track("The Beatles - I Want To Hold Your Hand"),
-                        new Track("The Beatles - We Can Work it Out")
+                        new Track("I Want To Hold Your Hand", List.of(new Track.Artist("The Beatles"))),
+                        new Track("We Can Work it Out", List.of(new Track.Artist("The Beatles")))
                 )));
 
         CityQuery query = new CityQuery("Campinas");
         Playlist playlist = retrievePlaylistByCityUseCase.query(query).block();
 
         assertEquals(2, playlist.getTracks().size());
-        assertEquals("The Beatles - I Want To Hold Your Hand", playlist.getTracks().get(0).getName());
-        assertEquals("The Beatles - We Can Work it Out", playlist.getTracks().get(1).getName());
+        assertEquals("I Want To Hold Your Hand", playlist.getTracks().get(0).getName());
+        assertEquals("We Can Work it Out", playlist.getTracks().get(1).getName());
     }
 
     private void setupMusicMock(Genre genre, Playlist playlist) {

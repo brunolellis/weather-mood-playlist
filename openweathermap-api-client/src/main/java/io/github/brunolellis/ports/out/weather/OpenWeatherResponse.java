@@ -1,4 +1,4 @@
-package io.github.brunolellis.ports.out;
+package io.github.brunolellis.ports.out.weather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

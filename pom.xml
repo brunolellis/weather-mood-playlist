@@ -26,7 +26,8 @@
 		<module>playlist</module>
 		<module>openweathermap-api-client</module>
 		<module>playlist-api</module>
-	</modules>
+        <module>spotify-api-client</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -39,6 +40,12 @@
 			<dependency>
 				<groupId>io.github.brunolellis</groupId>
 				<artifactId>openweathermap-api-client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.github.brunolellis</groupId>
+				<artifactId>spotify-api-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
