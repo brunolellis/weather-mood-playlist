@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  playlist-api:
+    image: playlist-api
+    build: .
+    ports:
+      - 8080:8080
