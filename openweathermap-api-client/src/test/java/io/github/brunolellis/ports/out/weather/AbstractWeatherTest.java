@@ -1,4 +1,4 @@
-package io.github.brunolellis.ports.out.spotify;
+package io.github.brunolellis.ports.out.weather;
 
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

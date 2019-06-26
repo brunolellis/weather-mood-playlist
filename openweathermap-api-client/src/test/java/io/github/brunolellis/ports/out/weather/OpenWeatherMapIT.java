@@ -1,8 +1,7 @@
-package io.github.brunolellis.ports.out.spotify;
+package io.github.brunolellis.ports.out.weather;
 
 import static org.junit.Assert.assertTrue;
 
-import io.github.brunolellis.ports.out.weather.WeatherService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

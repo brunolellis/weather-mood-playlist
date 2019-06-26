@@ -1,9 +1,11 @@
 package io.github.brunolellis.ports.out.weather;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class OpenWeatherResponse {
 
     @JsonProperty("main")
@@ -12,6 +14,7 @@ public class OpenWeatherResponse {
 }
 
 @Data
+@Builder
 class Temperature {
 
     @JsonProperty("temp")
