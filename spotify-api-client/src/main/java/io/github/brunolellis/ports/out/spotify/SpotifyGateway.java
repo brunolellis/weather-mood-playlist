@@ -46,7 +46,7 @@ public class SpotifyGateway {
 
     }
 
-    public Mono<SearchResponse> search(Authorization token, Genre genre) {
+    private Mono<SearchResponse> search(Authorization token, Genre genre) {
         return WebClient.create(properties.getApiUrl())
                         .get()
                         .uri(uriBuilder -> uriBuilder.path("/v1/search") // ?q=genre%3Arock&type=track
