@@ -1,0 +1,111 @@
+swagger: "2.0"
+info:
+  description: "Documentation about Weather Mood Playlist"
+  version: "1.0.0"
+  title: "Weather Mood Playlist API"
+host: "localhost:8080"
+schemes:
+  - http
+tags:
+  - name: "playlist"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+
+  /api/v1/playlist/city/{city}:
+    get:
+      tags:
+        - "playlist"
+      summary: "Returns a playlist for the specified city"
+      parameters:
+        - name: "city"
+          in: "path"
+          description: "City name"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Playlist found"
+          schema:
+            $ref: "#/definitions/PlaylistResponse"
+        400:
+          description: "Validation error(s)"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+        404:
+          description: "Playlist not found"
+        500:
+          description: "Unexpected error"
+
+  /api/v1/playlist/coordinates:
+    get:
+      tags:
+        - "playlist"
+      summary: "Returns a playlist for a geographic location"
+      parameters:
+        - in: query
+          name: lat
+          type: number
+          format: float
+          required: true
+          description: Latitude
+        - in: query
+          name: lon
+          type: number
+          format: float
+          required: true
+          description: Longitude
+
+      responses:
+        200:
+          description: "Playlist found"
+          schema:
+            $ref: "#/definitions/PlaylistResponse"
+        400:
+          description: "Validation error(s)"
+          schema:
+            $ref: "#/definitions/ApiErrorResponse"
+        404:
+          description: "Playlist not found"
+        500:
+          description: "Unexpected error"
+
+
+definitions:
+  PlaylistResponse:
+    type: "object"
+    required:
+      - "tracks"
+    properties:
+      tracks:
+        type: "array"
+        items:
+          type: object
+          properties:
+            name:
+              description: "Track name"
+              type: "string"
+            artists:
+              description: "Artist(s)"
+              type: "array"
+              items:
+                type: object
+                properties:
+                  name:
+                    description: "Artist name"
+                    type: "string"
+
+  ApiErrorResponse:
+    description: "Errors might occur"
+    type: "object"
+    properties:
+      errors:
+        type: "array"
+        items:
+          type: object
+          properties:
+            message:
+              description: "Some more details"
+              type: "string"

@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/playlist")
+@RequestMapping("/api/v1/playlist")
 @RequiredArgsConstructor
 public class PlaylistResource {
 
