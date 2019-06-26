@@ -1,9 +1,8 @@
 package io.github.brunolellis.playlist.adapter.web;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.github.brunolellis.playlist.usecase.coordinates.CoordinatesQuery;
+import io.github.brunolellis.playlist.usecase.coordinates.RetrievePlaylistByCoordinatesUseCase;
+import org.springframework.web.bind.annotation.*;
 
 import io.github.brunolellis.playlist.usecase.Playlist;
 import io.github.brunolellis.playlist.usecase.city.CityQuery;
@@ -18,9 +17,16 @@ public class PlaylistResource {
 
     private final RetrievePlaylistByCityUseCase retrievePlaylistByCityUseCase;
 
+    private final RetrievePlaylistByCoordinatesUseCase retrievePlaylistByCoordinatesUseCase;
+
     @GetMapping("/city/{city}")
-    public Mono<Playlist> getByCity(@PathVariable String city) {
+    public Mono<Playlist> getByCity(@PathVariable("city") String city) {
         return retrievePlaylistByCityUseCase.query(new CityQuery(city));
+    }
+
+    @GetMapping("/coordinates")
+    public Mono<Playlist> getByCoordinates(@RequestParam("lat") float latitude, @RequestParam("lon") float longitude) {
+        return retrievePlaylistByCoordinatesUseCase.query(new CoordinatesQuery(latitude, longitude));
     }
 
 }

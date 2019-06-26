@@ -1,16 +1,22 @@
 package io.github.brunolellis.ports.out.spotify;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 public class SearchResponse {
     private Track tracks;
 }
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 class Track {
@@ -18,6 +24,8 @@ class Track {
 
 }
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 class TrackItem {
@@ -26,6 +34,8 @@ class TrackItem {
 
 }
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 class Artist {
