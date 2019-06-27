@@ -13,10 +13,10 @@
 	</parent>
 
 	<groupId>io.github.brunolellis</groupId>
-	<artifactId>ifood-backend-advanced-test</artifactId>
+	<artifactId>weather-mood-playlist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ifood-backend-advanced-test</name>
-	<description>iFood Backend Advanced Test</description>
+	<name>weather-mood-playlist</name>
+	<description>weather mood playlist</description>
 
 	<properties>
 		<java.version>11</java.version>
