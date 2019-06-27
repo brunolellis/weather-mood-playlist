@@ -8,7 +8,10 @@
 
 ## Architecture
 
-Following the principles of hexagonal architecture, the architecture clearly separates what is domain logic from its boundaries, by using adapters and ports.
+Following the principles of hexagonal architecture, it clearly separates what is domain logic from its boundaries by using adapters and ports.
+
+![hexagonal architecture](resources/hexagonal.png?raw=true "hexagonal architecture")
+
 
 Translating it to the Java and Maven world, there are 4 modules:
 - playlist: domain
