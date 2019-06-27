@@ -15,7 +15,7 @@ public class WeatherCacheConfig {
     public Cache<String, OpenWeatherResponse> weatherCache() {
         return Caffeine.newBuilder()
                 .maximumSize(500)
-                .expireAfterWrite(Duration.ofSeconds(60))
+                .expireAfterAccess(Duration.ofMinutes(5))
                 .build();
     }
 }

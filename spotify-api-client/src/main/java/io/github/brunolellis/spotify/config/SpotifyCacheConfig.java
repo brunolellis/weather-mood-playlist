@@ -16,7 +16,7 @@ public class SpotifyCacheConfig {
     public Cache<Genre, SearchResponse> spotifyCache() {
         return Caffeine.newBuilder()
                 .maximumSize(500)
-                .expireAfterWrite(Duration.ofSeconds(60))
+                .expireAfterAccess(Duration.ofMinutes(5))
                 .build();
     }
 

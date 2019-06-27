@@ -52,7 +52,6 @@ public class OpenWeatherMapGateway {
                                 .queryParam("APPID", properties.getAppid())
                                 .build())
                         .retrieve()
-                        .onStatus(HttpStatus::isError, e -> Mono.error(new CityNotFoundException(latitude, longitude)))
                         .bodyToMono(OpenWeatherResponse.class)
                         .doOnNext(response -> weatherCache.put(key, response));
 

@@ -1,5 +1,6 @@
 package io.github.brunolellis.playlist.adapter.web;
 
+import io.github.brunolellis.playlist.port.out.CityNotFoundException;
 import io.github.brunolellis.playlist.usecase.coordinates.CoordinatesQuery;
 import io.github.brunolellis.playlist.usecase.coordinates.RetrievePlaylistByCoordinatesUseCase;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
@@ -30,7 +31,7 @@ public class PlaylistResource {
     public Mono<Playlist> getByCity(@PathVariable("city") String city) {
         return retrievePlaylistByCityUseCase.query(new CityQuery(city))
                 .compose(CircuitBreakerOperator.of(circuitBreaker))
-                .onErrorResume(exception -> playlistFallback(exception));
+                .onErrorResume(e -> !(e instanceof CityNotFoundException), e -> playlistFallback(e));
     }
 
     @GetMapping("/coordinates")
