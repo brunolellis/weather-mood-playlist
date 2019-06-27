@@ -1,0 +1,29 @@
+$ wrk -t4 -c20 -d10s --latency http://127.0.0.1:8080/api/v1/playlist/city/Campinas
+Running 10s test @ http://127.0.0.1:8080/api/v1/playlist/city/Campinas
+4 threads and 20 connections
+Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     1.24ms    1.61ms  27.29ms   92.55%
+    Req/Sec     5.38k     1.08k   12.88k    75.56%
+Latency Distribution
+    50%  731.00us
+    75%    1.15ms
+    90%    2.30ms
+    99%    8.82ms
+214741 requests in 10.10s, 330.95MB read
+Requests/sec:  21263.43
+Transfer/sec:     32.77MB
+
+$ wrk -t50 -c100 -d10s --latency http://127.0.0.1:8080/api/v1/playlist/city/Campinas
+Running 10s test @ http://127.0.0.1:8080/api/v1/playlist/city/Campinas
+50 threads and 100 connections
+Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency     4.71ms    2.53ms  32.84ms   85.59%
+    Req/Sec   442.27     93.33     1.90k    76.01%
+Latency Distribution
+    50%    3.82ms
+    75%    5.59ms
+    90%    7.82ms
+    99%   13.96ms
+221514 requests in 10.10s, 341.38MB read
+Requests/sec:  21933.32
+Transfer/sec:     33.80MB
