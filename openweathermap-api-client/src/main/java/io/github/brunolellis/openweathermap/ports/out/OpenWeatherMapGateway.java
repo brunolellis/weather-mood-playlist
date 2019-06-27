@@ -35,6 +35,13 @@ public class OpenWeatherMapGateway {
     }
 
     public Mono<OpenWeatherResponse> getTemperature(double latitude, double longitude) {
+        String key = latitude + ":" + longitude;
+
+        OpenWeatherResponse cachedResponse = weatherCache.getIfPresent(key);
+        if (cachedResponse != null) {
+            return Mono.just(cachedResponse);
+        }
+
         Mono<OpenWeatherResponse> weather =
                 WebClient.create(properties.getUrl())
                         .get()
@@ -46,7 +53,8 @@ public class OpenWeatherMapGateway {
                                 .build())
                         .retrieve()
                         .onStatus(HttpStatus::isError, e -> Mono.error(new CityNotFoundException(latitude, longitude)))
-                        .bodyToMono(OpenWeatherResponse.class);
+                        .bodyToMono(OpenWeatherResponse.class)
+                        .doOnNext(response -> weatherCache.put(key, response));
 
         return weather;
     }
